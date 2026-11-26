@@ -1,0 +1,4 @@
+experiment,sqlite_version,baseline_ms,optimized_ms,speedup,time_reduction_pct
+Stage 2,3.46.1,701.427684,0.374452,1873.211210,99.946616
+After restructuring,3.46.1,637.197402,0.376208,1693.736981,99.940959
+Local,3.50.2,1715.921600,0.837300,2049.351009,99.951204

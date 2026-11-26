@@ -1,0 +1,6 @@
+# Shared dependencies for the current A + B codebase.
+# Add dependencies for C/D/E only when their modules are integrated.
+numpy>=1.26,<3
+pandas>=2,<4
+matplotlib>=3.8,<4
+streamlit>=1.40,<2

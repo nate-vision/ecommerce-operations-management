@@ -1,0 +1,50 @@
+PASS: original DB, schema, seller/customer SQL and all 9 CSVs byte-identical
+PASS: seller seller_metrics.csv matches original (3095 rows)
+PASS: seller seller_by_state.csv matches original (22 rows)
+PASS: all 5 regenerated PNGs readable
+PASS: seller SQL 7 query row counts [10, 22, 5, 10, 1, 24, 1]
+=== Row counts loaded ===
+  geolocation          19177
+  customer_profile     96096
+  customer             99441
+  seller               3095
+  product_category     73
+  product              32951
+  orders               99441
+  order_item           112650
+  payment              103886
+  review               99224
+
+=== Orphan FK rows (should be 0) ===
+  orders.customer_id -> customer: 0
+  order_item.order_id -> orders: 0
+  order_item.product_id -> product: 0
+  order_item.seller_id -> seller: 0
+  payment.order_id -> orders: 0
+  review.order_id -> orders: 0
+
+Database saved: <test-workspace>/rebuild_check/database/olist.db
+PASS: rebuild matches customer 99441
+PASS: rebuild matches customer_profile 96096
+PASS: rebuild matches geolocation 19177
+PASS: rebuild matches order_item 112650
+PASS: rebuild matches orders 99441
+PASS: rebuild matches payment 103886
+PASS: rebuild matches product 32951
+PASS: rebuild matches product_category 73
+PASS: rebuild matches review 99224
+PASS: rebuild matches seller 3095
+PASS: database rebuild integrity and foreign keys
+test_details_and_history (__main__.CustomerTests.test_details_and_history) ... ok
+test_missing_and_invalid_inputs (__main__.CustomerTests.test_missing_and_invalid_inputs) ... ok
+test_order_items_and_ownership (__main__.CustomerTests.test_order_items_and_ownership) ... ok
+test_page_and_baseline (__main__.CustomerTests.test_page_and_baseline) ... ok
+test_read_only_and_index_plan (__main__.CustomerTests.test_read_only_and_index_plan) ... ok
+test_search (__main__.CustomerTests.test_search) ... ok
+test_summary_and_payment_accuracy (__main__.CustomerTests.test_summary_and_payment_accuracy) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.499s
+
+OK
+PASS: seven backend tests also pass against rebuilt database

@@ -1,0 +1,43 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local SQLite databases and sidecars (rebuild using load_to_sqlite.py)
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Source dataset: the nine original CSVs in data/ are tracked.
+# Do not ignore data/ or *.csv globally; experiment CSVs are also tracked.
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Local editor/OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Private team material and archives
+TeamForming.docx
+*.zip
+*.7z
+*.rar
+
+# Temporary learning scripts
+learn_*.py

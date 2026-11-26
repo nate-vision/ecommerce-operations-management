@@ -1,0 +1,61 @@
+test_details_and_history (__main__.CustomerTests.test_details_and_history) ... ok
+test_missing_and_invalid_inputs (__main__.CustomerTests.test_missing_and_invalid_inputs) ... ok
+test_order_items_and_ownership (__main__.CustomerTests.test_order_items_and_ownership) ... ok
+test_page_and_baseline (__main__.CustomerTests.test_page_and_baseline) ... ok
+test_read_only_and_index_plan (__main__.CustomerTests.test_read_only_and_index_plan) ... ok
+test_search (__main__.CustomerTests.test_search) ... ok
+test_summary_and_payment_accuracy (__main__.CustomerTests.test_summary_and_payment_accuracy) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.876s
+
+OK
+
+SQLite 3.46.1; 9 warm-cache runs; full fetch; page 1, 20 rows
+Query                  Rows   Median (ms)
+Q1_baseline              20    637.197402
+Q1_optimized             20      0.376208
+Q2                        1      0.376708
+Q3                        1      0.061283
+Q4                       17      0.155004
+Q5                        1      0.058148
+Q6                        1      0.037176
+Q1 speedup: 1693.74x
+
+Q1_baseline execution plan:
+MATERIALIZE ranked_customers
+CO-ROUTINE (subquery-3)
+CO-ROUTINE (subquery-4)
+SCAN c USING INDEX idx_customer_profile
+SEARCH o USING INDEX idx_orders_customer (customer_id=?) LEFT-JOIN
+SCAN (subquery-4)
+USE TEMP B-TREE FOR ORDER BY
+SCAN (subquery-3)
+SCAN p USING COVERING INDEX sqlite_autoindex_customer_profile_1
+BLOOM FILTER ON r (rn=? AND customer_unique_id=?)
+SEARCH r USING AUTOMATIC PARTIAL COVERING INDEX (rn=? AND customer_unique_id=?) LEFT-JOIN
+SEARCH g USING INDEX sqlite_autoindex_geolocation_1 (zip_code_prefix=?) LEFT-JOIN
+
+Q1_optimized execution plan:
+CO-ROUTINE customer_page
+SCAN customer_profile USING COVERING INDEX sqlite_autoindex_customer_profile_1
+SCAN p
+SEARCH c USING INDEX sqlite_autoindex_customer_1 (customer_id=?) LEFT-JOIN
+CORRELATED SCALAR SUBQUERY 3
+SEARCH c1 USING INDEX idx_customer_profile (customer_unique_id=?)
+SEARCH o1 USING INDEX idx_orders_customer (customer_id=?) LEFT-JOIN
+USE TEMP B-TREE FOR ORDER BY
+SEARCH g USING INDEX sqlite_autoindex_geolocation_1 (zip_code_prefix=?) LEFT-JOIN
+CORRELATED SCALAR SUBQUERY 2
+SEARCH c2 USING INDEX idx_customer_profile (customer_unique_id=?)
+SEARCH o USING INDEX idx_orders_customer (customer_id=?)
+USE TEMP B-TREE FOR ORDER BY
+
+Q4 execution plan:
+SEARCH c USING INDEX idx_customer_profile (customer_unique_id=?)
+SEARCH o USING INDEX idx_orders_customer (customer_id=?)
+SEARCH g USING INDEX sqlite_autoindex_geolocation_1 (zip_code_prefix=?) LEFT-JOIN
+CORRELATED SCALAR SUBQUERY 1
+SEARCH p USING INDEX idx_payment_order (order_id=?)
+USE TEMP B-TREE FOR ORDER BY
+Raw benchmark timings: <project>/results/customer/customer_benchmark.csv

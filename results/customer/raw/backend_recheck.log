@@ -1,0 +1,12 @@
+test_details_and_history (__main__.CustomerTests.test_details_and_history) ... ok
+test_missing_and_invalid_inputs (__main__.CustomerTests.test_missing_and_invalid_inputs) ... ok
+test_order_items_and_ownership (__main__.CustomerTests.test_order_items_and_ownership) ... ok
+test_page_and_baseline (__main__.CustomerTests.test_page_and_baseline) ... ok
+test_read_only_and_index_plan (__main__.CustomerTests.test_read_only_and_index_plan) ... ok
+test_search (__main__.CustomerTests.test_search) ... ok
+test_summary_and_payment_accuracy (__main__.CustomerTests.test_summary_and_payment_accuracy) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.655s
+
+OK

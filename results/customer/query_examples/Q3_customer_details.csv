@@ -1,0 +1,2 @@
+customer_unique_id,latest_customer_id,zip_code_prefix,city,state,avg_lat,avg_lng,first_order_date,latest_order_date
+8d50f5eadf50201ccdcedfb9e2ac8455,a682769c4bc10fc6ef2101337a6c83c9,4045,sao paulo,SP,-23.61866620197685,-46.639582867790025,2017-05-15 23:30:03,2018-08-20 19:14:26
